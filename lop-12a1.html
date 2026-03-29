@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lớp 12A1 - THPT Lê Quý Đôn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bk-blue: #002d5e;
+            --bk-light: #0056b3;
+            --footer-bg: #102b4e;
+            --bg-body: #ffffff; 
+            --container-width: 1440px; 
+            --gradient-primary: linear-gradient(135deg, #5a4fcf, #0056b3); /* Màu gradient xịn */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background-color: var(--bg-body); color: #333; line-height: 1.6; }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; }
+
+        /* === HEADER & MENU === */
+        header { background-color: var(--bk-blue); color: white; padding: 20px 0; }
+        .header-container { display: flex; align-items: center; }
+        .logo-lqd { height: 70px; margin-right: 20px; }
+        .header-text h1 { font-size: 16px; text-transform: uppercase; font-weight: normal; line-height: 1.4; }
+        .header-text b { font-size: 22px; display: block; margin-top: 5px; }
+
+        nav { background: white; border-bottom: 1px solid #ddd; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .nav-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; } 
+        .nav-container { display: flex; list-style: none; align-items: center; white-space: nowrap; }
+        .nav-container li a { display: block; padding: 18px 25px; color: #333; text-decoration: none; font-weight: bold; font-size: 15px; text-transform: uppercase; }
+        .nav-container li a:hover { color: var(--bk-light); background-color: #f8f9fa; }
+        .home-icon { font-size: 20px; }
+        .active-menu { color: var(--bk-light) !important; border-bottom: 3px solid var(--bk-light); }
+
+        /* === BANNER === */
+        .hero-12a1 {
+            width: 100%; aspect-ratio: 21 / 9; max-height: 500px;
+            background: linear-gradient(rgba(0,30,60,0.5), rgba(0,30,60,0.5)), url('images/bang-thanh-xuan.jpg') no-repeat center center; 
+            background-size: cover; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 20px;
+        }
+        .hero-12a1 h2 { font-size: 4.5rem; margin-bottom: 10px; font-weight: bold; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); letter-spacing: 2px; }
+        .hero-12a1 p { font-size: 1.8rem; font-weight: 600; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); text-transform: uppercase; }
+
+        /* === NỘI DUNG 2 CỘT (Sĩ số & Giải thưởng) === */
+        .class-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 60px; margin-bottom: 80px; align-items: center; }
+        .class-image img { width: 100%; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
+        .class-stats { display: flex; flex-direction: column; gap: 30px; }
+        .stat-card { display: flex; align-items: center; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; transition: transform 0.3s; }
+        .stat-card:hover { transform: translateY(-5px); }
+        .stat-icon { width: 80px; height: 80px; border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 2.2rem; color: white; margin-right: 25px; flex-shrink: 0; }
+        .icon-purple { background-color: #7b61ff; } .icon-orange { background-color: #ff9800; } 
+        .stat-info h5 { color: #666; font-size: 1.2rem; margin-bottom: 5px; font-weight: 600; text-transform: uppercase; }
+        .stat-info .number { color: #5a4fcf; font-size: 3.5rem; font-weight: bold; line-height: 1; margin-bottom: 5px; }
+        .stat-info .number.orange-text { color: #ff9800; }
+        .stat-info p { color: #888; font-size: 1.05rem; }
+
+        /* === SECTION: GIÁO VIÊN CHỦ NHIỆM (NÂNG CẤP XỊN SÒ) === */
+        .teacher-section {
+            margin-bottom: 100px;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 50px;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        .teacher-card {
+            display: flex;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+            padding: 50px;
+            gap: 50px;
+            max-width: 1100px;
+            margin: 0 auto;
+            border: 1px solid #f5f5f5;
+            transition: all 0.4s ease;
+        }
+        
+        /* Hiệu ứng nổi lên khi di chuột vào toàn bộ khung */
+        .teacher-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+        }
+
+        /* Khung chứa ảnh cô Hạnh */
+        .teacher-img-wrapper {
+            flex: 0 0 350px; /* Độ rộng cố định của ảnh */
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .teacher-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease; /* Thời gian zoom mượt */
+        }
+
+        /* Zoom ảnh khi hover vào Card */
+        .teacher-card:hover .teacher-img {
+            transform: scale(1.05);
+        }
+
+        /* Khung thông tin chữ */
+        .teacher-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .teacher-name {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+
+        .teacher-role {
+            font-size: 1.1rem;
+            color: #888;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .teacher-bio {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 35px;
+        }
+
+        /* Các khối "Kinh nghiệm", "Giải thưởng"... */
+        .teacher-tags {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .tag-item {
+            background: #f8f9fa;
+            padding: 18px 25px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #333;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .tag-item i {
+            width: 35px;
+            font-size: 1.3rem;
+        }
+        
+
+        /* Đổi màu icon cho sinh động */
+        .tag-icon-1 { color: #00a8ff; } /* Màu xanh lam */
+        .tag-icon-2 { color: #ff9800; } /* Màu cam cúp */
+        .tag-icon-3 { color: #ff4757; } /* Màu đỏ tim */
+
+        /* Hiệu ứng trượt sang phải khi hover */
+        .tag-item:hover {
+            background: #ffffff;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transform: translateX(15px); /* Trượt ngang 15px */
+            border-left-color: #5a4fcf; /* Hiện viền tím mộng mơ */
+        }
+
+        /* === FOOTER === */
+        footer { background: var(--footer-bg); color: white; font-size: 0.95rem; }
+        .footer-top { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; padding: 50px 20px; }
+        .footer-logo-box { display: flex; align-items: center; margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
+        .footer-logo-box img { height: 60px; margin-right: 15px; background: white; border-radius: 5px; padding: 2px;}
+        .footer-logo-text span { font-size: 0.85rem; display: block; text-transform: uppercase; }
+        .footer-logo-text strong { font-size: 1.2rem; display: block; text-transform: uppercase; margin-top: 3px; }
+        .footer-contact li { list-style: none; margin-bottom: 15px; display: flex; align-items: flex-start; }
+        .footer-contact li i { margin-top: 4px; margin-right: 10px; font-size: 0.9rem; }
+        .official-link-btn { display: inline-block; background: linear-gradient(135deg, #0056b3, #00a8ff); color: white; padding: 10px 20px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 0.9rem; margin-top: 10px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 168, 255, 0.4); }
+        .official-link-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0, 168, 255, 0.6); color: white; }
+        .footer-col h4 { font-size: 1.1rem; margin-bottom: 20px; font-weight: 600; text-transform: uppercase;}
+        .social-icons { display: flex; gap: 10px; flex-wrap: wrap; }
+        .social-icons a { display: flex; justify-content: center; align-items: center; width: 40px; height: 40px; border-radius: 5px; color: white; font-size: 1.2rem; text-decoration: none; transition: transform 0.3s; }
+        .social-icons a:hover { transform: scale(1.1); }
+        .bg-fb { background: #3b5998; }
+        .footer-bottom { background: var(--footer-bottom); padding: 15px 0; font-size: 0.9rem; text-align: center; }
+
+        /* === SECTION: WE ARE K23-A1 (ALBUM ẢNH NGHỆ THUẬT) === */
+        .album-section {
+            padding: 20px 20px 100px;
+        }
+        
+.album-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Tách riêng hiệu ứng màu gradient cho chữ */
+        .gradient-text {
+            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Bảo vệ emoji không bị mất màu */
+        .emoji-icon {
+            -webkit-text-fill-color: initial; /* Trả lại màu gốc cho emoji */
+        }
+
+        .album-subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+            font-style: italic;
+        }
+
+        /* Lưới Bento Grid bất đối xứng */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr); /* Chia 6 cột vô hình */
+            grid-auto-rows: 250px; /* Chiều cao mỗi hàng */
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        /* Hiệu ứng nổi lên và phóng to ảnh khi hover */
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.08); /* Ảnh bên trong zoom nhẹ */
+        }
+
+        /* Lớp phủ đen và chữ hiện lên từ dưới */
+        .gallery-overlay {
+            position: absolute;
+            bottom: -60px; /* Giấu xuống dưới */
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+            padding: 30px 20px 15px;
+            color: white;
+            transition: bottom 0.4s ease;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            bottom: 0; /* Trượt lên khi hover */
+        }
+        
+        /* Sắp xếp vị trí 5 ảnh thành một khối đẹp mắt */
+        .item-1 { grid-column: span 4; grid-row: span 2; } /* Ảnh to nhất, chiếm 4 cột, 2 hàng */
+        .item-2 { grid-column: span 2; grid-row: span 1; } /* Ảnh nhỏ góc trên phải */
+        .item-3 { grid-column: span 2; grid-row: span 1; } /* Ảnh nhỏ góc dưới phải */
+        .item-4 { grid-column: span 3; grid-row: span 1; } /* Ảnh vừa hàng dưới */
+        .item-5 { grid-column: span 3; grid-row: span 1; } /* Ảnh vừa hàng dưới */
+
+    /* === RESPONSIVE MOBILE === */
+        @media (max-width: 900px) {
+            .class-content { grid-template-columns: 1fr; gap: 30px; margin-top: 30px; }
+            .teacher-card { flex-direction: column; padding: 30px; gap: 30px; }
+            .teacher-img-wrapper { flex: auto; max-width: 100%; height: auto; }
+            .section-title { font-size: 2.2rem; }
+            .footer-top { grid-template-columns: 1fr; gap: 30px; padding: 40px 15px; }
+            
+            /* Sửa lại lưới album cho điện thoại */
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
+            .item-1 { grid-column: span 2; grid-row: span 2; } /* Ảnh chính vẫn to */
+            .item-2, .item-3, .item-4, .item-5 { grid-column: span 1; grid-row: span 1; }
+        }
+        @media (max-width: 600px) {
+            /* Điện thoại dọc thì xếp thành 1 cột dọc hết */
+            .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 250px;}
+            .item-1, .item-2, .item-3, .item-4, .item-5 { grid-column: span 1; grid-row: span 1; }
+        }
+    /* === MODAL ẢNH PHÓNG TO (LIGHTBOX) === */
+        /* Cái khung lớn bao bọc ảnh phóng to, ẩn đi lúc đầu */
+        .modal {
+            display: none; /* Lúc đầu là ẩn */
+            position: fixed; /* Cố định trên màn hình, không bị trượt */
+            z-index: 1000; /* Nằm trên tất cả mọi thứ */
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Cho phép cuộn nếu ảnh quá cao */
+            background-color: rgba(0,0,0,0.9); /* Nền đen mờ 90% */
+            backdrop-filter: blur(5px); /* Làm mờ nhẹ nền đằng sau */
+        }
+
+        /* Bức ảnh được phóng to */
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%; /* Không quá rộng màn hình đt */
+            max-height: 80vh; /* Không quá cao 80% chiều cao màn hình */
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            animation-name: zoom; /* Gọi hiệu ứng mở ảnh */
+            animation-duration: 0.5s; /* Thời gian mở 0.5 giây */
+            border: 5px solid white;
+        }
+
+        /* Chú thích ảnh */
+        #caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: white;
+            padding: 20px 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Nút đóng (X) */
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            transform: rotate(90deg); /* Xoay khi hover */
+        }
+
+        /* Định nghĩa hiệu ứng mở ảnh: Zoom từ nhỏ đến lớn */
+        @keyframes zoom {
+            from {transform:scale(0)}
+            to {transform:scale(1)}
+        }
+
+        /* Responsive Mobile: Chỉnh nhỏ nút X và caption */
+        @media (max-width: 700px){
+            .modal-content { max-width: 95%; }
+            .close { right: 15px; top: 10px; font-size: 30px; }
+            #caption { font-size: 1rem; }
+        }
+        /* === SECTION: ĐỘI LẬP TRÌNH WEB (Y CHANG ẢNH MẪU) === */
+        .web-team-section {
+            margin-bottom: 100px;
+        }
+
+        /* Phần Tiêu đề Section */
+        .web-team-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 50px;
+            padding-top: 50px;
+            border-top: 1px dashed #eaeaea;
+        }
+        .web-team-title-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .web-team-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff0f4;
+            color: #d53f8c;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            align-self: flex-start;
+        }
+        .web-team-title {
+            font-size: 2.5rem;
+            color: #222;
+            font-weight: 800;
+            margin: 0;
+        }
+        .web-team-subtitle {
+            max-width: 450px;
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.6;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        /* Lưới 3 cột */
+        .web-team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        /* Thẻ Info Card */
+        .wt-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #f9f9f9;
+        }
+        .wt-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+        }
+
+        /* Đường viền Gradient phía trên cùng của Thẻ */
+        .wt-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+        }
+        .wt-card.card-1::before { background: linear-gradient(90deg, #6b46c1, #4299e1); } /* Tím - Xanh */
+        .wt-card.card-2::before { background: linear-gradient(90deg, #00b5d8, #48bb78); } /* Xanh - Lục */
+        .wt-card.card-3::before { background: linear-gradient(90deg, #fc8181, #f56565); } /* Đỏ - Hồng */
+
+        /* Khung ảnh */
+        .wt-img-wrapper {
+            width: 100%;
+            aspect-ratio: 4/5;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 25px;
+            margin-top: 10px;
+        }
+        .wt-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Tag chữ nổi đè lên mép dưới của ảnh */
+        .wt-img-overlay {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .wt-card.card-1 .wt-img-overlay { color: #5a4fcf; }
+        .wt-card.card-2 .wt-img-overlay { color: #008080; }
+        .wt-card.card-3 .wt-img-overlay { color: #c53030; }
+
+        /* Tag Nhóm phát triển (Nằm dưới ảnh) */
+        .wt-sub-tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .wt-card.card-1 .wt-sub-tag { background: #f0f0ff; color: #5a4fcf; }
+        .wt-card.card-2 .wt-sub-tag { background: #f0f0ff; color: #5a4fcf; }
+        .wt-card.card-3 .wt-sub-tag { background: #f0f0ff; color: #5a4fcf; }
+
+        /* Tên và Mô tả */
+        .wt-name {
+            font-size: 1.8rem;
+            color: #222;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        .wt-desc {
+            font-size: 1.05rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .web-team-grid { grid-template-columns: repeat(2, 1fr); gap: 20px;}
+            .web-team-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .web-team-subtitle { text-align: left; }
+        }
+        @media (max-width: 768px) {
+            .web-team-grid { grid-template-columns: 1fr; max-width: 450px; margin: 0 auto; }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-container">
+            <img src="images/logo-lqd.jpg" alt="Logo LQD" class="logo-lqd">
+            <div class="header-text">
+                <h1>SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐẮK LẮK<br><b>TRƯỜNG THPT LÊ QUÝ ĐÔN</b></h1>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-wrapper">
+            <ul class="container nav-container">
+                <li><a href="index.html"><i class="fas fa-home home-icon"></i></a></li>
+                <li><a href="lop-12a1.html" class="active-menu">Lớp 12A1</a></li>
+                <li><a href="tu-van.html">Tư vấn hướng nghiệp</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero-12a1">
+        <h2>LỚP 12A1</h2>
+        <p>Một trang sách - Một cánh cửa mới</p>
+    </div>
+
+    <main class="container">
+        
+        <div class="class-content">
+            <div class="class-image">
+                <img src="images/anh-lop-12.jpg" alt="Tập thể lớp 12A1">
+            </div>
+            <div class="class-stats">
+                <div class="stat-card">
+                    <div class="stat-icon icon-purple"><i class="fas fa-users"></i></div>
+                    <div class="stat-info">
+                        <h5>Sĩ số</h5>
+                        <div class="number">43</div>
+                        <p>Học sinh năng động, sáng tạo</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon icon-orange"><i class="fas fa-trophy"></i></div>
+                    <div class="stat-info">
+                        <h5>Giải thưởng</h5>
+                        <div class="number orange-text">15+</div>
+                        <p>Giải học sinh giỏi các môn</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="teacher-section">
+            <h2 class="section-title"> Giáo Viên Chủ Nhiệm</h2>
+            
+            <div class="teacher-card">
+                <div class="teacher-img-wrapper">
+                    <img src="images/hanhlee.jpg" alt="Cô Lê Thị Hồng Hạnh" class="teacher-img">
+                </div>
+                
+                <div class="teacher-info">
+                    <h3 class="teacher-name">Lê Thị Hồng Hạnh</h3>
+                    <p class="teacher-role">Giáo viên chủ nhiệm</p>
+                    <p class="teacher-bio">Với hơn 15 năm gắn bó với nghề giáo, cô Hạnh luôn tận tâm trong giảng dạy, hết lòng vì học sinh. Cô không ngừng tạo dựng môi trường học tập thân thiện, gần gũi, khuyến khích các em phát huy năng lực và hoàn thiện bản thân.</p>
+                    
+                    <div class="teacher-tags">
+                        <div class="tag-item">
+                            <i class="fas fa-book tag-icon-1"></i> 15+ năm kinh nghiệm
+                        </div>
+                        <div class="tag-item">
+                            <i class="fas fa-trophy tag-icon-2"></i> Nhiều giải thưởng xuất sắc
+                        </div>
+                        <div class="tag-item">
+                            <i class="fas fa-heart tag-icon-3"></i> Yêu thương học trò
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="album-section">
+            <h2 class="album-title">
+                <span class="emoji-icon">📸</span> 
+                <span class="gradient-text">WE ARE K23-A1</span>
+            </h2>
+            <p class="album-subtitle">Lưu giữ những khoảnh khắc thanh xuân rực rỡ nhất của tập thể 12A1</p>
+
+            <div class="gallery-grid">
+                <div class="gallery-item item-1">
+                    <img src="images/kyyeu1.jpg" alt="Kỷ yếu lớp 12A1">
+                    <div class="gallery-overlay">Thanh xuân rực rỡ cùng K23-A1 ✨</div>
+                </div>
+
+                <div class="gallery-item item-2">
+                    <img src="images/thuctap.jpg" alt="Thực tập">
+                    <div class="gallery-overlay">Ảnh chụp với cô thực tập 🎒</div>
+                </div>
+
+                <div class="gallery-item item-3">
+                    <img src="images/19.jpg" alt="Tuổi 19">
+                    <div class="gallery-overlay">Tuổi trẻ vô giá 💖</div>
+                </div>
+
+                <div class="gallery-item item-4">
+                    <img src="images/A1.jpg" alt="Ký ức A1">
+                    <div class="gallery-overlay">Một tập thể, một gia đình 🏫</div>
+                </div>
+
+                <div class="gallery-item item-5">
+                    <img src="images/anh-lop-10.jpg" alt="Ngày đầu lớp 10">
+                    <div class="gallery-overlay">Nhớ ngày đầu bỡ ngỡ lớp 10 🌱</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <section class="web-team-section container">
+            
+            <div class="web-team-header">
+                <div class="web-team-title-container">
+                    <h2 class="web-team-title">Nhóm thiết kế Website</h2>
+                </div>
+                <p class="web-team-subtitle">
+                </p>
+            </div>
+
+            <div class="web-team-grid">
+                
+                <div class="wt-card card-1">
+                    <div class="wt-img-wrapper">
+                        <img src="images/Duy.jpg" alt="Nguyễn Đức Duy" class="wt-img">
+                    </div>
+                    <span class="wt-sub-tag">Nhóm phát triển website</span>
+                    <h3 class="wt-name">Nguyễn Đức Duy</h3>
+                    <p class="wt-desc"></p>
+                </div>
+
+                <div class="wt-card card-2">
+                    <div class="wt-img-wrapper">
+                        <img src="images/haonam.jpg" alt="Lê Nguyễn Hạo Nam" class="wt-img">
+                    </div>
+                    <span class="wt-sub-tag">Nhóm phát triển website</span>
+                    <h3 class="wt-name">Lê Nguyễn Hạo Nam</h3>
+                    <p class="wt-desc"></p>
+                </div>
+
+                <div class="wt-card card-3">
+                    <div class="wt-img-wrapper">
+                        <img src="images/quanthai.jpg" alt="Thái Anh Quân" class="wt-img">
+                    </div>
+                    <span class="wt-sub-tag">Nhóm phát triển website</span>
+                    <h3 class="wt-name">Thái Anh Quân</h3>
+                    <p class="wt-desc"></p>
+                </div>
+
+            </div>
+        </section>
+
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
+
+    <footer>
+        <div class="container footer-top">
+            <div class="footer-col">
+                <div class="footer-logo-box">
+                    <img src="images/logo-lqd.jpg" alt="Logo LQD">
+                    <div class="footer-logo-text">
+                        <span>Sở Giáo dục và Đào tạo Đắk Lắk</span>
+                        <strong>Trường THPT Lê Quý Đôn</strong>
+                    </div>
+                </div>
+                <ul class="footer-contact">
+                    <li><i class="fas fa-caret-right"></i> Cơ sở: 27 Trần Nhật Duật, Phường Tân Lợi, TP. Buôn Ma Thuột, Đắk Lắk</li>
+                    <li><i class="fas fa-caret-right"></i> Số điện thoại: 0262 3953 354</li>
+                    <li>
+                        <a href="https://c3lequydon.daklak.edu.vn/" target="_blank" class="official-link-btn">
+                            <i class="fas fa-globe"></i> Truy cập Website Chính Thức
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>LIÊN KẾT MẠNG XÃ HỘI</h4>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/profile.php?id=100042065540522" target="_blank" class="bg-fb">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                Bản quyền thuộc Trường THPT Lê Quý Đôn - Website thực hiện bởi Nhóm Máy 12-12A1
+            </div>
+        </div>
+        
+    </footer>
+
+    <script>
+        // Lấy Modal
+        var modal = document.getElementById("myModal");
+
+        // Lấy bức ảnh nằm trong modal
+        var modalImg = document.getElementById("img01");
+        
+        // Lấy chú thích
+        var captionText = document.getElementById("caption");
+
+        // Lấy tất cả các bức ảnh trong gallery
+        var images = document.querySelectorAll(".gallery-item img");
+
+        // Lặp qua từng bức ảnh để gắn sự kiện click
+        images.forEach(function(img){
+            img.onclick = function(){
+                modal.style.display = "block"; // Mở modal
+                modalImg.src = this.src; // Copy nguồn ảnh sang modal
+                captionText.innerHTML = this.alt; // Copy alt làm chú thích
+            }
+        });
+
+        // Lấy nút đóng (X)
+        var span = document.getElementsByClassName("close")[0];
+
+        // Khi người dùng click vào nút đóng, modal sẽ ẩn đi
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Hoặc khi người dùng click vào bất kỳ đâu ngoài ảnh phóng to, modal cũng ẩn
+        modal.onclick = function(e) {
+            if(e.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>

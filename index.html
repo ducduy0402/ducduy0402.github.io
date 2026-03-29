@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trường THPT Lê Quý Đôn - Đắk Lắk</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* === BIẾN & CÀI ĐẶT CHUNG === */
+        :root {
+            --bk-blue: #002d5e;
+            --bk-light: #0056b3;
+            --footer-bg: #102b4e;
+            --footer-bottom: #091a33;
+            --bg-body: #f4f7f9;
+            --container-width: 1440px; 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background-color: var(--bg-body); color: #333; line-height: 1.6; }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; }
+
+        /* === HEADER & MENU === */
+        header { background-color: var(--bk-blue); color: white; padding: 20px 0; }
+        .header-container { display: flex; align-items: center; }
+        .logo-lqd { height: 70px; margin-right: 20px; }
+        .header-text h1 { font-size: 16px; text-transform: uppercase; font-weight: normal; line-height: 1.4; }
+        .header-text b { font-size: 22px; display: block; margin-top: 5px; }
+
+        nav { background: white; border-bottom: 1px solid #ddd; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .nav-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; } 
+        .nav-container { display: flex; list-style: none; align-items: center; }
+        .nav-container li a { display: block; padding: 18px 25px; color: #333; text-decoration: none; font-weight: bold; font-size: 15px; text-transform: uppercase; white-space: nowrap; }
+        .nav-container li a:hover { color: var(--bk-light); background-color: #f8f9fa; }
+        .home-icon { font-size: 20px; }
+
+/* === 4. HERO & MAIN CONTENT (ĐÃ THÊM HIỆU ỨNG) === */
+        .hero { width: 100%; height: 480px; background: url('images/cong-truong.jpg') no-repeat center center; background-size: cover; border-bottom: 5px solid var(--bk-light); }
+        .main-content { margin-top: -60px; padding-bottom: 60px; }
+        
+        /* -- Khu vực 4 ô số liệu -- */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        
+        .stat-box { 
+            background: white; 
+            padding: 40px 20px; /* Tăng khoảng không gian bên trong */
+            border-radius: 15px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+            text-align: center; 
+            border-top: 5px solid var(--bk-light); /* Viền trên màu xanh nhạt */
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Hiệu ứng chuyển động mượt */
+            cursor: default; /* Đổi con trỏ chuột */
+        }
+        
+        .stat-box .icon { 
+            font-size: 3rem; 
+            display: inline-block; /* Bắt buộc phải là inline-block mới dùng transform được */
+            margin-bottom: 15px; 
+            transition: transform 0.3s ease; 
+        }
+        
+        .stat-box h4 { color: var(--bk-blue); margin-bottom: 15px; font-size: 1.4rem; font-weight: bold; }
+        .stat-box p { color: #555; font-size: 1.05rem; line-height: 1.5; }
+
+        /* HIỆU ỨNG TƯƠNG TÁC CHO 4 Ô SỐ LIỆU */
+        .stat-box:hover {
+            transform: translateY(-12px); /* Nổi lên 12px */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15); /* Bóng đổ đậm hơn */
+            border-top-color: var(--bk-blue); /* Đổi viền trên thành xanh đậm */
+        }
+        .stat-box:hover .icon {
+            transform: scale(1.2) translateY(-5px); /* Icon phóng to và nảy lên */
+        }
+
+        /* -- Khu vực 6 mục giới thiệu -- */
+        .info-card { 
+            background: white; 
+            padding: 50px 60px; /* Tăng padding cho rộng rãi giống ảnh */
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+            margin-bottom: 40px; 
+            border: 1px solid #eaeaea; /* Thêm viền mỏng quanh card */
+        }
+        
+        .info-card h2 { 
+            text-align: center; 
+            color: var(--bk-blue); 
+            margin-bottom: 50px; 
+            font-size: 2.2rem; 
+            text-transform: uppercase; 
+            font-weight: bold;
+        }
+        
+        .info-item { 
+            margin-bottom: 35px; 
+            padding-left: 25px; 
+            border-left: 4px solid var(--bk-blue); /* Vạch dọc màu xanh đậm mặc định */
+            transition: all 0.3s ease; /* Hiệu ứng chuyển động mượt */
+            border-radius: 0 10px 10px 0; /* Bo góc bên phải một chút */
+        }
+        
+        .info-item strong { 
+            color: var(--bk-blue); 
+            display: flex; 
+            align-items: center; /* Căn giữa icon và chữ */
+            gap: 10px; /* Khoảng cách giữa icon và chữ */
+            margin-bottom: 10px; 
+            font-size: 1.25rem; 
+            text-transform: uppercase;
+        }
+        
+        .info-item p { color: #444; font-size: 1.1rem; line-height: 1.7; }
+
+        /* HIỆU ỨNG TƯƠNG TÁC CHO 6 MỤC GIỚI THIỆU */
+        .info-item:hover {
+            transform: translateX(15px); /* Trượt toàn bộ khối sang phải 15px */
+            border-left: 8px solid var(--bk-light); /* Vạch bên trái dày gấp đôi và đổi sang xanh nhạt */
+            background-color: #f8fbff; /* Nền chuyển sang màu xanh cực kỳ nhạt */
+            padding-top: 15px; /* Thêm tí padding cho khối có chiều sâu */
+            padding-bottom: 15px;
+            box-shadow: inset 5px 0 10px rgba(0, 86, 179, 0.05); /* Bóng đổ chìm bên trong */
+        }
+
+        /* === FOOTER === */
+        footer { background: var(--footer-bg); color: white; font-size: 0.95rem; }
+        
+        /* Chỉnh lại thành 2 cột vì đã bỏ phần giữa */
+        .footer-top { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; padding: 50px 20px; }
+        
+        .footer-logo-box { display: flex; align-items: center; margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
+        .footer-logo-box img { height: 60px; margin-right: 15px; background: white; border-radius: 5px; padding: 2px;}
+        .footer-logo-text span { font-size: 0.85rem; display: block; text-transform: uppercase; }
+        .footer-logo-text strong { font-size: 1.2rem; display: block; text-transform: uppercase; margin-top: 3px; }
+        
+        .footer-contact li { list-style: none; margin-bottom: 15px; display: flex; align-items: flex-start; }
+        .footer-contact li i { margin-top: 4px; margin-right: 10px; font-size: 0.9rem; }
+        
+        .official-link-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #0056b3, #00a8ff);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 168, 255, 0.4);
+        }
+        .official-link-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0, 168, 255, 0.6); color: white; }
+
+        .footer-col h4 { font-size: 1.1rem; margin-bottom: 20px; font-weight: 600; text-transform: uppercase;}
+        
+        /* Nút Facebook duy nhất */
+        .social-icons { display: flex; gap: 10px; flex-wrap: wrap; }
+        .social-icons a {
+            display: flex; justify-content: center; align-items: center;
+            width: 40px; height: 40px; border-radius: 5px;
+            color: white; font-size: 1.2rem; text-decoration: none; transition: transform 0.3s;
+        }
+        .social-icons a:hover { transform: scale(1.1); }
+        .bg-fb { background: #3b5998; }
+
+        /* Dải dưới cùng chỉ còn Bản quyền */
+        .footer-bottom { background: var(--footer-bottom); padding: 15px 0; font-size: 0.9rem; text-align: center; }
+
+        /* === ĐIỆN THOẠI === */
+        @media (max-width: 768px) {
+            header { padding: 15px 0; }
+            .logo-lqd { height: 50px; }
+            .header-text h1 { font-size: 12px; }
+            .header-text b { font-size: 16px; }
+            .hero { height: 250px; }
+            .main-content { margin-top: -30px; }
+            .footer-top { grid-template-columns: 1fr; gap: 30px; padding: 40px 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-container">
+            <img src="images/logo-lqd.jpg" alt="Logo LQD" class="logo-lqd">
+            <div class="header-text">
+                <h1>SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐẮK LẮK<br><b>TRƯỜNG THPT LÊ QUÝ ĐÔN</b></h1>
+            </div>
+        </div>
+    </header>
+
+<nav>
+        <div class="nav-wrapper">
+            <ul class="container nav-container">
+                <li><a href="index.html"><i class="fas fa-home home-icon"></i></a></li>
+                
+                <li><a href="lop-12a1.html">Lớp 12A1</a></li>
+                <li><a href="tu-van.html">Tư vấn hướng nghiệp</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero"></div>
+
+    <main class="container main-content">
+        <div class="stats-grid">
+            <div class="stat-box"><span class="icon">📍</span><h4>Địa chỉ</h4><p>27 Trần Nhật Duật, Phường Tân Lợi, TP. Buôn Ma Thuột</p></div>
+            <div class="stat-box"><span class="icon">📅</span><h4>Thành lập</h4><p>Năm 2000 (26 năm hình thành và phát triển)</p></div>
+            <div class="stat-box"><span class="icon">👥</span><h4>Quy mô</h4><p>40 lớp - 1.738 học sinh - 103 giáo viên</p></div>
+            <div class="stat-box"><span class="icon">🏆</span><h4>Thành tích 25-26</h4><p>7 HS dự HSGQG - 155 HSG cấp trường - 23 SP KHKT - 39 HSG cấp tỉnh</p></div>
+        </div>
+
+        <div class="info-card">
+            <h2>Giới thiệu Trường THPT Lê Quý Đôn</h2>
+            
+            <div class="info-item">
+                <strong>📜 LỊCH SỬ HÌNH THÀNH</strong>
+                <p>Trường THPT Lê Quý Đôn là trường trung học phổ thông công lập, thành lập năm 2000 tại phường Buôn Ma Thuột, tỉnh Đắk Lắk. Trải qua 26 năm xây dựng và phát triển, nhà trường từng bước khẳng định vị thế là cơ sở giáo dục ổn định, uy tín, được phụ huynh tin tưởng và học sinh lựa chọn.</p>
+            </div>
+
+            <div class="info-item">
+                <strong>🏫 QUY MÔ VÀ ĐỘI NGŨ</strong>
+                <p>Hiện nay, nhà trường có 40 lớp với 1.738 học sinh; đội ngũ 103 cán bộ, giáo viên, nhân viên có trình độ chuyên môn vững vàng, tâm huyết với nghề, đáp ứng yêu cầu Chương trình Giáo dục phổ thông 2018.</p>
+            </div>
+
+            <div class="info-item">
+                <strong>🏢 CƠ SỞ VẬT CHẤT</strong>
+                <p>Cơ sở vật chất của nhà trường ngày càng được đầu tư hoàn thiện với 43 phòng học kiên cố, các phòng bộ môn, khu giáo dục thể chất và thư viện từng bước chuyển đổi số, đáp ứng tốt nhu cầu dạy và học.</p>
+            </div>
+
+            <div class="info-item">
+                <strong>🎓 CHẤT LƯỢNG GIÁO DỤC VÀ THÀNH TÍCH</strong>
+                <p>Nhà trường chú trọng nâng cao chất lượng giáo dục đại trà gắn với phát triển mũi nhọn. Riêng học kỳ I năm học 2025–2026, học sinh đạt nhiều thành tích trong các kỳ thi học sinh giỏi và hoạt động khoa học kỹ thuật.</p>
+            </div>
+
+            <div class="info-item">
+                <strong>🌱 GIÁO DỤC TOÀN DIỆN</strong>
+                <p>Bên cạnh học tập, nhà trường tổ chức đa dạng các hoạt động trải nghiệm, câu lạc bộ và giáo dục kỹ năng sống, góp phần hình thành nhân cách, lối sống tích cực và tinh thần trách nhiệm cho học sinh.</p>
+            </div>
+
+            <div class="info-item">
+                <strong>🎯 ĐỊNH HƯỚNG PHÁT TRIỂN</strong>
+                <p>Trong giai đoạn phát triển mới, nhà trường tiếp tục đổi mới phương pháp dạy học, đẩy mạnh chuyển đổi số, giáo dục STEM, xây dựng môi trường học đường kỷ cương – an toàn – hạnh phúc.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-top">
+            
+            <div class="footer-col">
+                <div class="footer-logo-box">
+                    <img src="images/logo-lqd.jpg" alt="Logo LQD">
+                    <div class="footer-logo-text">
+                        <span>Sở Giáo dục và Đào tạo Đắk Lắk</span>
+                        <strong>Trường THPT Lê Quý Đôn</strong>
+                    </div>
+                </div>
+                <ul class="footer-contact">
+                    <li><i class="fas fa-caret-right"></i> Cơ sở: 27 Trần Nhật Duật, Phường Tân Lợi, TP. Buôn Ma Thuột, Đắk Lắk</li>
+                    <li><i class="fas fa-caret-right"></i> Số điện thoại: 0262 3953 354</li>
+                    <li>
+                        <a href="https://c3lequydon.daklak.edu.vn/" target="_blank" class="official-link-btn">
+                            <i class="fas fa-globe"></i> Truy cập Website Chính Thức
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>LIÊN KẾT MẠNG XÃ HỘI</h4>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/profile.php?id=100042065540522" target="_blank" class="bg-fb">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                Bản quyền thuộc Trường THPT Lê Quý Đôn - Website thực hiện bởi Nhóm Máy 12-12A1
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
